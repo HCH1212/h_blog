@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Go binary
-        run: go build -o blog
+        run: go build -o main
 
       - name: Deploy to server
         run: |
