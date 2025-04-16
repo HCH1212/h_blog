@@ -1,0 +1,59 @@
+---
+title: "windows on linux"
+date: "2025-04-16"
+categories: ["other"]
+---
+
+## 如何在linux上运行windows虚拟机
+
+之前一直使用vmware, 就是安装vmware有点繁琐，使用体验感还不错。
+
+最近从朋友那了解到一个更加轻便简单的方式起windows，特分享一下：
+前提：能正常使用的docker
+步骤: 
+1. 拉取镜像
+```
+docker pull dockurr/windows
+```
+2. 新建一个文件夹wins(自定义),新建配置文件docker-compose.yaml
+```
+mkdir wins
+touch docker-compose.yaml
+```
+3. 编写docker-compose.yaml
+```
+vim docker-compose.yaml
+```
+```
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: "11" # windows版本
+      RAM_SIZE: "8G" # 分配内存
+      CPU_CORES: "8" # 分配cpu核数
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006 # http端口
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    volumes:
+      - ./windows:/storage
+    restart: always
+    stop_grace_period: 2m
+```
+4. 运行docker-compose.yaml
+```
+docker compose up -d
+```
+5. 访问127.0.0.1:8006, 第一次等待windows安装
+6. 关闭的话直接关闭容器
+
+
+github: <https://github.com/dockur/windows>
+还有一个相似的macos：<<https://github.com/dockur/macos>
