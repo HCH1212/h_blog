@@ -37,7 +37,10 @@ jobs:
         run: |
           # 确保服务器目录存在
           sshpass -p '${{ secrets.SERVER_PASSWORD }}' ssh -o StrictHostKeyChecking=no \
-            root@${{ secrets.SERVER_IP }} "mkdir -p /root/h_blog"
+              root@${{ secrets.SERVER_IP }} "
+                rm -rf /root/h_blog/*
+                mkdir -p /root/h_blog
+              "
           
           # 上传打包文件
           sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no \
