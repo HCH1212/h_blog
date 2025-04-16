@@ -1,3 +1,3 @@
 .PHONY: git
 git:
-	git add . && git commit -m "Update content" && git push origin master
+	go build -o main && git add . && git commit -m "Update content" && git push origin master
