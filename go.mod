@@ -1,4 +1,4 @@
-module h_blog
+module github.com/HCH1212/h_blog
 
 go 1.24.1
 
