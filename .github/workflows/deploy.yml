@@ -17,7 +17,7 @@ jobs:
       - name: Deploy to server
         run: |
           sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no \
-            main content/ templates/ \
+            main content/ template/ \
             root@${{ secrets.SERVER_IP }}:/root/h_blog/
           
           sshpass -p '${{ secrets.SERVER_PASSWORD }}' ssh -o StrictHostKeyChecking=no \
