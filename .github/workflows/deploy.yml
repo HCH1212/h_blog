@@ -11,14 +11,45 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24'
+
       - name: Build Go binary
-        run: go build -o main
+        run: |
+          go build -o main
+          ls -la  # 确认构建成功
+
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: Prepare deployment package
+        run: |
+          # 创建临时目录并复制所需文件
+          mkdir -p deploy-package
+          cp main deploy-package/
+          cp -r content/ deploy-package/
+          cp -r template/ deploy-package/
+          tar czf deploy.tar.gz -C deploy-package .
 
       - name: Deploy to server
         run: |
+          # 确保服务器目录存在
+          sshpass -p '${{ secrets.SERVER_PASSWORD }}' ssh -o StrictHostKeyChecking=no \
+            root@${{ secrets.SERVER_IP }} "mkdir -p /root/h_blog"
+          
+          # 上传打包文件
           sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no \
-            main content/ template/ \
+            deploy.tar.gz \
             root@${{ secrets.SERVER_IP }}:/root/h_blog/
           
+          # 在服务器上解压并设置权限
           sshpass -p '${{ secrets.SERVER_PASSWORD }}' ssh -o StrictHostKeyChecking=no \
-            root@${{ secrets.SERVER_IP }} "systemctl restart h_blog"
+            root@${{ secrets.SERVER_IP }} "
+              cd /root/h_blog
+              tar xzf deploy.tar.gz
+              chmod +x main
+              rm deploy.tar.gz
+              systemctl restart h_blog
+            "
