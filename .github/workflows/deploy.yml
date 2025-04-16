@@ -19,13 +19,13 @@ jobs:
           rsync -avz --delete \
             --exclude='.git' \
             -e "ssh -o StrictHostKeyChecking=no" \
-            ./ ubuntu@${{ secrets.SERVER_IP }}:/home/ubuntu/h_blog/
+            ./ ubuntu@${{ secrets.SERVER_IP }}:/root/h_blog/
         env:
           RSYNC_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
 
       - name: Restart service
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.SERVER_IP }} \
-            "cd /home/ubuntu/h_blog && sudo systemctl restart h_blog"
+            "cd /root/h_blog && sudo systemctl restart h_blog"
         env:
           SSH_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
