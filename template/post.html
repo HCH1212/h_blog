@@ -4,15 +4,23 @@
     <title>{{ .post.Title }} - My Blog</title>
     <meta charset="utf-8">
     <style>
+        * {background: #e1dfe4
+        }
         body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
         .post-content { line-height: 1.6; }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 <!--<h1>{{ .post.Title }}</h1>-->
-<div class="post-content">
-    {{ .post.Content }}
+<div class="post-content" id="content">
+    <pre><code>{{ .post.Content }}</code></pre>
 </div>
 <p><a href="/">Back to Home</a></p>
 </body>
+
+<script>
+    const rawMarkdown = `{{ .post.Content }}`;
+    document.getElementById('content').innerHTML = marked.parse(rawMarkdown);
+</script>
 </html>

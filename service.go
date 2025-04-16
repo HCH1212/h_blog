@@ -1,11 +1,8 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
-	"github.com/yuin/goldmark"
 	"gopkg.in/yaml.v2"
-	"html/template"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -97,12 +94,7 @@ func loadPost(slug string) (Post, error) {
 		}
 	}
 
-	// 渲染Markdown
-	var buf bytes.Buffer
-	if err := goldmark.Convert(markdownContent, &buf); err != nil {
-		return Post{}, err
-	}
-	post.Content = template.HTML(buf.String())
+	post.Content = string(markdownContent)
 
 	return post, nil
 }

@@ -2,13 +2,12 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"html/template"
 	"net/http"
 )
 
 type Post struct {
 	Title      string
-	Content    template.HTML
+	Content    string
 	Slug       string
 	Date       string
 	Categories []string
