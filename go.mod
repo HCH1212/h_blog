@@ -1,10 +1,11 @@
 module github.com/HCH1212/h_blog
 
-go 1.24.1
+go 1.24
 
 require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/yuin/goldmark v1.7.10
+	gopkg.in/yaml.v2 v2.4.0
 )
 
 require (
@@ -33,6 +34,5 @@ require (
 	golang.org/x/sys v0.20.0 // indirect
 	golang.org/x/text v0.15.0 // indirect
 	google.golang.org/protobuf v1.34.1 // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
