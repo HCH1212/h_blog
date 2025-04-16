@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Go Blog</title>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .category-nav { margin-bottom: 20px; }
+        .category-link {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 5px 10px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            text-decoration: none;
+            color: #333;
+        }
+        .category-link.active {
+            background: #3498db;
+            color: white;
+        }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { margin-bottom: 15px; }
+        .post-link {
+            font-size: 1.2em;
+            text-decoration: none;
+            color: #2c3e50;
+        }
+        .post-link:hover { color: #3498db; }
+        .post-meta {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            margin-left: 10px;
+        }
+        .post-categories {
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+        .post-category {
+            display: inline-block;
+            margin-right: 5px;
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+<h1>Blog Posts</h1>
+
+<div class="category-nav">
+    <a class="category-link {{ if not .category }}active{{ end }}" href="/">All</a>
+    {{ range .allCategories }}
+    <a class="category-link {{ if eq $.category .Name }}active{{ end }}"
+       href="/category/{{ .Name }}">{{ .Name }} ({{ .Count }})</a>
+    {{ end }}
+</div>
+
+<ul class="post-list">
+    {{ range .posts }}
+    <li class="post-item">
+        <a class="post-link" href="/post/{{ .Slug }}">{{ .Title }}</a>
+        {{ if .Date }}<span class="post-meta">{{ .Date }}</span>{{ end }}
+        <div class="post-categories">
+            {{ range .Categories }}
+            <a class="post-category" href="/category/{{ . }}">{{ . }}</a>
+            {{ end }}
+        </div>
+    </li>
+    {{ end }}
+</ul>
+</body>
+</html>

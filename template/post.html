@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ .post.Title }} - My Go Blog</title>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .post-content { line-height: 1.6; }
+    </style>
+</head>
+<body>
+<!--<h1>{{ .post.Title }}</h1>-->
+<div class="post-content">
+    {{ .post.Content }}
+</div>
+<p><a href="/">Back to Home</a></p>
+</body>
+</html>
