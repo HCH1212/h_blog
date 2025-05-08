@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Post struct {
@@ -68,6 +69,11 @@ func main() {
 			"category":      name,
 			"allCategories": getAllCategories(posts),
 		})
+	})
+
+	// 友链路由
+	r.GET("/links", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "links.html", nil)
 	})
 
 	// 启动服务器
