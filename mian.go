@@ -76,6 +76,11 @@ func main() {
 		c.HTML(http.StatusOK, "links.html", nil)
 	})
 
+	// 追番路由
+	r.GET("/loves", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "loves.html", nil)
+	})
+
 	// 启动服务器
 	r.Run(":8888")
 }
