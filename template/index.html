@@ -80,7 +80,7 @@
         <a class="category-link {{ if not .category }}active{{ end }}" href="/">All</a>
         <a class="category-link" href="/loves">追番</a>
         <!-- 添加友链链接 -->
-        <a class="category-link" href="/links">友情链接</a>
+        <a class="category-link" href="/links">友链</a>
         {{ range .allCategories }}
         <a class="category-link {{ if eq $.category .Name }}active{{ end }}" href="/category/{{ .Name }}">{{ .Name }}
             ({{ .Count }})</a>
