@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
+
+	"gopkg.in/yaml.v2"
 )
 
 // 加载所有文章
@@ -45,6 +46,11 @@ func loadPosts() ([]Post, error) {
 	if len(posts) == 0 {
 		return nil, fmt.Errorf("no valid markdown files found")
 	}
+
+	// 使用 sort.Slice 反转顺序
+	sort.Slice(posts, func(i, j int) bool {
+		return i > j
+	})
 
 	return posts, nil
 }
