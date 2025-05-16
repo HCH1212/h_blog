@@ -28,6 +28,7 @@
             border-radius: 3px;
             text-decoration: none;
             color: #333;
+            margin-top: 10px;
         }
 
         .category-link.active {
@@ -78,9 +79,9 @@
 
     <div class="category-nav">
         <a class="category-link {{ if not .category }}active{{ end }}" href="/">All</a>
-        <a class="category-link" href="/loves">追番</a>
+        <a class="category-link" href="/loves">loves</a>
         <!-- 添加友链链接 -->
-        <a class="category-link" href="/links">友链</a>
+        <a class="category-link" href="/links">links</a>
         {{ range .allCategories }}
         <a class="category-link {{ if eq $.category .Name }}active{{ end }}" href="/category/{{ .Name }}">{{ .Name }}
             ({{ .Count }})</a>
