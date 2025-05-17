@@ -71,6 +71,24 @@
             margin-right: 5px;
             color: #3498db;
         }
+
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            font-size: 14px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #back-to-top:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
 
@@ -101,6 +119,30 @@
         </li>
         {{ end }}
     </ul>
+    <!-- 返回顶部按钮 -->
+    <button id="back-to-top" style="display: none;">↑ 返回顶部</button>
+
+    <script>
+        // 获取按钮元素
+        const backToTopButton = document.getElementById('back-to-top');
+
+        // 监听滚动事件，显示或隐藏按钮
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        // 点击按钮返回顶部
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // 平滑滚动效果
+            });
+        });
+    </script>
 </body>
 
 </html>
