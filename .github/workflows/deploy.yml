@@ -31,6 +31,7 @@ jobs:
           cp main deploy-package/
           cp -r content/ deploy-package/
           cp -r template/ deploy-package/
+          cp -r static/ deploy-package/
           tar czf deploy.tar.gz -C deploy-package .
 
       - name: Deploy to server
