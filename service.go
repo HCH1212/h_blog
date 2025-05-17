@@ -49,7 +49,7 @@ func loadPosts() ([]Post, error) {
 
 	// 使用 sort.Slice 反转顺序
 	sort.Slice(posts, func(i, j int) bool {
-		return i > j
+		return posts[i].Date > posts[j].Date
 	})
 
 	return posts, nil
