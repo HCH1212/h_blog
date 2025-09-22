@@ -15,11 +15,11 @@
 
     <style>
         body {
-            background: #e1dfe4;
+            background: #e1dfe4; /* 与主页一致 */
             display: flex;
             justify-content: center;
             padding: 40px;
-            color: #000; /* 默认文字颜色 */
+            color: #000;
         }
         .markdown-body {
             max-width: 800px;
@@ -29,19 +29,23 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        /* 黑夜模式适配 */
+        /* 黑夜模式适配，与主页统一 */
         @media (prefers-color-scheme: dark) {
             body {
-                background: #181818; /* 深色背景 */
-                color: #e0e0e0;      /* 文字颜色 */
-            }
-            .markdown-body {
-                background: #242424; /* 深色卡片 */
+                background: #121212; /* 与主页风格统一的深色背景 */
                 color: #e0e0e0;
             }
+            .markdown-body {
+                background: #1e1e1e; /* 深色卡片，与主页内容区保持统一 */
+                color: #e0e0e0;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+            }
             pre, code {
-                background: #1e1e1e !important; /* 代码块背景 */
+                background: #1a1a1a !important; /* 代码块背景 */
                 color: #dcdcdc !important;
+            }
+            a {
+                color: #4ea1ff; /* 链接颜色在暗色模式下变亮 */
             }
         }
     </style>
@@ -60,9 +64,7 @@
         }
     }
 
-    // 页面加载时应用
     applyHighlightTheme();
-    // 监听系统主题变化
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyHighlightTheme);
 
     // 渲染 markdown
@@ -77,7 +79,6 @@
     });
     document.getElementById('content').innerHTML = marked.parse(rawMarkdown)
         + '<p><a href="/">Back to Home</a></p>';
-
 </script>
 </body>
 </html>
