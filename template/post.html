@@ -3,18 +3,23 @@
 <head>
     <meta charset="utf-8">
     <title>{{ .post.Title }} - My Blog</title>
+
     <!-- GitHub Markdown 样式 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5/github-markdown.min.css">
-    <!-- highlight.js 代码高亮 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
+
+    <!-- highlight.js 代码高亮（默认亮色主题）-->
+    <link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
+
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+
     <style>
         body {
             background: #e1dfe4;
             display: flex;
             justify-content: center;
             padding: 40px;
+            color: #000; /* 默认文字颜色 */
         }
         .markdown-body {
             max-width: 800px;
@@ -23,13 +28,44 @@
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
+
+        /* 黑夜模式适配 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #181818; /* 深色背景 */
+                color: #e0e0e0;      /* 文字颜色 */
+            }
+            .markdown-body {
+                background: #242424; /* 深色卡片 */
+                color: #e0e0e0;
+            }
+            pre, code {
+                background: #1e1e1e !important; /* 代码块背景 */
+                color: #dcdcdc !important;
+            }
+        }
     </style>
 </head>
 <body>
 <div class="markdown-body" id="content"></div>
-</body>
 
 <script>
+    // 根据系统主题切换 highlight.js 样式
+    function applyHighlightTheme() {
+        const themeLink = document.getElementById('hljs-theme');
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            themeLink.href = "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css";
+        } else {
+            themeLink.href = "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
+        }
+    }
+
+    // 页面加载时应用
+    applyHighlightTheme();
+    // 监听系统主题变化
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyHighlightTheme);
+
+    // 渲染 markdown
     const rawMarkdown = `{{ .post.Content }}`;
     marked.setOptions({
         highlight: function (code, lang) {
@@ -39,6 +75,9 @@
             return hljs.highlightAuto(code).value;
         }
     });
-    document.getElementById('content').innerHTML = marked.parse(rawMarkdown);
+    document.getElementById('content').innerHTML = marked.parse(rawMarkdown)
+        + '<p><a href="/">Back to Home</a></p>';
+
 </script>
+</body>
 </html>
