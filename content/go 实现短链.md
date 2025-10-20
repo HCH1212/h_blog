@@ -1,5 +1,5 @@
 ---
-title: "go 实现短链（点击短链发生了什么）"
+title: "go 实现短链"
 date: "2025-04-18"
 categories: ["other"]
 ---
@@ -159,5 +159,3 @@ func main() {
 9. 服务器重定向到原始 URL。
 
 参考：<https://www.cnblogs.com/beatle-go/p/18301400>
-
-

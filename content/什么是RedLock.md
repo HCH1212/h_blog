@@ -1,5 +1,5 @@
 ---
-title: "什么是RedLock（红锁）"
+title: "什么是RedLock"
 date: "2025-09-23"
 categories: ["db"]
 ---

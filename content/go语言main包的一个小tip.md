@@ -1,5 +1,5 @@
 ---
-title: "go语言main包中的一个小tips"
+title: "go语言main包的一个小tip"
 date: "2025-01-08"
 categories: ["go"]
 ---
